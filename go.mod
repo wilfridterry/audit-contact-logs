@@ -1,4 +1,4 @@
-module github.com/wilfridterry/github.com/wilfridterry/audit-log
+module github.com/wilfridterry/audit-log
 
 go 1.22.5
 
