@@ -1,0 +1,55 @@
+package main
+
+import (
+	"audit-log/internal/config"
+	"audit-log/internal/repository"
+	"audit-log/internal/server"
+	service "audit-log/internal/sirvice"
+	"context"
+	"log"
+	"time"
+
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+)
+
+func main() {
+	cf, err := config.NewConfig()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
+	defer cancel()
+
+	opts := options.Client()
+	opts.SetAuth(options.Credential{
+		Username: cf.DB.Username,
+		Password: cf.DB.Password,
+	})
+	opts.ApplyURI(cf.DB.URI)
+
+	dbClient, err := mongo.Connect(ctx, opts)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer func() {
+		if err := dbClient.Disconnect(ctx); err != nil {
+			log.Fatal(err)
+		}
+	}()
+
+	if err := dbClient.Ping(ctx, nil); err != nil {
+		log.Fatal(err)
+	}
+	db := dbClient.Database(cf.DB.Database)
+
+	repo := repository.New(db)
+	auditService := service.New(repo)
+	auditSrv := server.NewAuditServer(auditService)
+	srv := server.New(auditSrv)
+
+	if err := srv.ListenAndServe(cf.Server.Port); err != nil {
+		panic(err)
+	}
+}
