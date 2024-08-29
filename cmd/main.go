@@ -1,13 +1,14 @@
 package main
 
 import (
-	"audit-log/internal/config"
-	"audit-log/internal/repository"
-	"audit-log/internal/server"
-	service "audit-log/internal/sirvice"
 	"context"
 	"log"
 	"time"
+
+	"github.com/wilfridterry/audit-log/internal/config"
+	"github.com/wilfridterry/audit-log/internal/repository"
+	"github.com/wilfridterry/audit-log/internal/server"
+	service "github.com/wilfridterry/audit-log/internal/sirvice"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

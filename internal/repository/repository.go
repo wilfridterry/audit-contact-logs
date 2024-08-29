@@ -1,8 +1,9 @@
 package repository
 
 import (
-	"audit-log/pkg/domain/audit"
 	"context"
+
+	"github.com/wilfridterry/audit-log/pkg/domain/audit"
 
 	"go.mongodb.org/mongo-driver/mongo"
 )

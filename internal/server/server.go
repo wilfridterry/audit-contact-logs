@@ -1,19 +1,20 @@
 package server
 
 import (
-	"audit-log/pkg/domain/audit"
 	"fmt"
 	"net"
+
+	"github.com/wilfridterry/audit-log/pkg/domain/audit"
 
 	"google.golang.org/grpc"
 )
 
 type Server struct {
-	grpcSrv *grpc.Server
+	grpcSrv     *grpc.Server
 	auditServer *AuditServer
 }
 
-func New(auditServer *AuditServer) (*Server) {
+func New(auditServer *AuditServer) *Server {
 	return &Server{
 		grpc.NewServer(),
 		auditServer,

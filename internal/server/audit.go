@@ -1,8 +1,9 @@
 package server
 
 import (
-	"audit-log/pkg/domain/audit"
 	"context"
+
+	"github.com/wilfridterry/audit-log/pkg/domain/audit"
 )
 
 type AuditService interface {
