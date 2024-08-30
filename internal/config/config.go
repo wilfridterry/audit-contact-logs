@@ -10,9 +10,7 @@ type Config struct {
 
 	DB MongoDB
 
-	Server struct {
-		Port int `mapstructure:"port"`
-	} `mapstructure:"server"`
+	Port int
 }
 
 type MongoDB struct {

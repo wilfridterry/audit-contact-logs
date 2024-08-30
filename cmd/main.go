@@ -50,7 +50,7 @@ func main() {
 	auditSrv := server.NewAuditServer(auditService)
 	srv := server.New(auditSrv)
 
-	if err := srv.ListenAndServe(cf.Server.Port); err != nil {
+	if err := srv.ListenAndServe(cf.Port); err != nil {
 		panic(err)
 	}
 }

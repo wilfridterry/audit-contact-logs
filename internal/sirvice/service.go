@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 
-	"github.com/wilfridterry/audit-log/pkg/domain/audit"
+	"github.com/wilfridterry/audit-log/pkg/domain"
 )
 
 type Repository interface {

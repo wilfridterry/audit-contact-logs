@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 
-	"github.com/wilfridterry/audit-log/pkg/domain/audit"
+	"github.com/wilfridterry/audit-log/pkg/domain"
 
 	"go.mongodb.org/mongo-driver/mongo"
 )
