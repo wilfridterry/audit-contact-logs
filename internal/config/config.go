@@ -10,7 +10,9 @@ type Config struct {
 
 	DB MongoDB
 
-	Port int
+	Server struct {
+		Port int
+	}
 }
 
 type MongoDB struct {
@@ -28,6 +30,10 @@ func NewConfig() (*Config, error) {
 	}
 
 	if err := envconfig.Process("db", &cf.DB); err != nil {
+		return nil, err
+	}
+
+	if err := envconfig.Process("server", &cf.Server); err != nil {
 		return nil, err
 	}
 
